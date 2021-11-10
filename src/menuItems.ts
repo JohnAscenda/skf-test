@@ -5,46 +5,45 @@ interface NavItem {
 
 const NavItems: NavItem[] = [
   {
-    title: "Item 1",
+    title: "Dashboard",
     children: [
       {
-        title: "Item 1.1",
+        title: "Skills",
         children: [
           {
-            title: "Item 1.1.1" /* , children: [{ title: "Item 1.1.1.1" }]  */,
+            title: "React",
+            children: [{ title: "Hooks" }],
+          },
+          {
+            title: "HTML",
+          },
+          {
+            title: "CSS",
           },
         ],
       },
-      { title: "Item 1.2" },
     ],
   },
   {
-    title: "Item 2",
+    title: "Profiles",
     children: [
       {
-        title: "Item 2.1",
+        title: "John",
         children: [
           {
-            title: "Item 2.1.1",
+            title: "Work",
             children: [
               {
-                title: "Item 2.1.1.1",
-                children: [
-                  {
-                    title: "Item 2.1.1.1.1",
-                    children: [
-                      {
-                        title: "Item 2.1.1.1.1.1",
-                        children: [
-                          {
-                            title: "Item 2.1.1.1.1.1.1.bajs",
-                            children: [{ title: "Item 2.1.1.1.1.1.1.1.korv" }],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
+                title: "Ascenda AA",
+              },
+              {
+                title: "Ascenda AB",
+              },
+              {
+                title: "Ascenda AC",
+              },
+              {
+                title: "Ascenda AD",
               },
             ],
           },
