@@ -1,61 +1,60 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header";
-import MenuItems from "./menuItems";
-
+import axios from "axios";
 import arrow from "./assets/icons/arrow.png";
 
 interface NavItem {
-  title: string;
-  children?: NavItem[];
+  name: string;
+  children: NavItem[] | undefined;
+}
+
+interface MenuResponse {
+  data: NavItem[];
 }
 
 interface RenderMenuProps {
   items: NavItem[] | undefined;
+  topLevel?: boolean;
 }
 
 function App() {
-  const [activeMenus, setActiveMenus] = useState(Array());
+  const [activeMenus, setActiveMenus] = useState<String[]>(Array());
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
+  const [menu, setMenu] = useState<NavItem[]>([]);
 
-  const RenderMenu = ({ items }: RenderMenuProps) => {
-    const applyTopNodeStyle = () => {
-      var x = document.querySelector("ul");
-      var y = x?.children;
-      if (y) {
-        for (var i = 0; i < y.length; i++) {
-          y[i].classList.add("topNode");
-        }
-      }
-    };
+  useEffect(() => {
+    axios.get<MenuResponse>("./backend/menu.json").then((res) => {
+      setMenu(res.data.data);
+    });
+  }, []);
 
-    useEffect(() => {
-      applyTopNodeStyle();
-    }, []);
-
+  const RenderMenu = ({ items, topLevel = false }: RenderMenuProps) => {
     return (
-      <ul className={"menu"}>
-        {items?.map(({ title, children }: NavItem, index) => (
+      <ul className="menu">
+        {items?.map(({ name, children }: NavItem, index) => (
           <li
             key={index}
-            className={`${children ? "hasChildren" : ""} ${
-              selectedItem === title ? "selectedItem" : ""
-            } ${items[index].children === undefined ? "hasNoChildren" : ""} `}
+            className={`
+              ${topLevel && "topNode"} 
+              ${children && "hasChildren"} 
+              ${selectedItem === name ? "selectedItem" : ""}  
+            `}
             onClick={(e) => items[index] && toggleSubMenu(e, items[index])}
           >
-            <div className={"name"}>
-              {title}
+            <div className="name">
+              {name}
 
               {children && (
                 <img
-                  className={activeMenus.includes(children) ? "expanded" : ""}
+                  className={activeMenus.includes(name) ? "expanded" : ""}
                   src={arrow}
-                  alt={""}
+                  alt=""
                 />
               )}
             </div>
 
-            {activeMenus.includes(items[index].children) ? (
+            {children && activeMenus.includes(name) ? (
               <RenderMenu items={children} />
             ) : null}
           </li>
@@ -64,36 +63,39 @@ function App() {
     );
   };
 
-  const toggleSubMenu = (e: React.SyntheticEvent, item: NavItem) => {
+  const toggleSubMenu = (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    item: NavItem
+  ) => {
     e.stopPropagation();
 
     if (!item.children) {
-      setSelectedItem(item.title);
+      setSelectedItem(item.name);
     }
 
-    console.log(item.title);
+    console.log(item.name);
 
     const newItems = [...activeMenus];
 
-    if (activeMenus.includes(item.children)) {
-      var index = newItems.indexOf(item.children);
+    if (activeMenus.includes(item.name)) {
+      var index = newItems.indexOf(item.name);
       if (index > -1) {
         newItems.splice(index, 1);
       }
     } else {
       if (item.children === undefined) return;
-      newItems.push(item.children);
+      newItems.push(item.name);
     }
 
     setActiveMenus(newItems);
   };
 
   return (
-    <div className={"app"}>
+    <div className="app">
       <Header className="header" />
       <div className="menuContainer">
         <img src="#" alt="skf" style={{ marginBottom: "120px" }} />
-        <RenderMenu items={MenuItems} />
+        <RenderMenu items={menu} topLevel={true} />
       </div>
       <main style={{ display: "grid", placeItems: "center" }}>
         <h2>{selectedItem}</h2>
