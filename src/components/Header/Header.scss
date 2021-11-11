@@ -1,4 +1,12 @@
 .headerContainer {
   padding: 24px;
   background-color: #fff;
+  display: flex;
+  column-gap: 1em;
+
+  h2 {
+    margin: 0;
+    display: grid;
+    place-items: center;
+  }
 }

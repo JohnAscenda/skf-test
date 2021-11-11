@@ -6,9 +6,9 @@ interface HeaderProps {
 
 const Header = ({ className }: HeaderProps) => {
   return (
-    <div className={`${className} headerContainer`}>
+    <header className={`${className} headerContainer`}>
       <h2>skf-test</h2>
-    </div>
+    </header>
   );
 };
 
