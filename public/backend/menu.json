@@ -26,6 +26,54 @@
           "name": "Some node 1.4"
         }
       ]
+    },
+    {
+      "name": "Some node 2",
+      "children": [
+        {
+          "name": "Some node 2.1",
+          "children": [
+            {
+              "name": "Some node 2.1.1"
+            }
+          ]
+        },
+        {
+          "name": "Some node 2.2",
+          "children": [
+            {
+              "name": "Some node 2.2.1",
+              "children": [
+                {
+                  "name": "Some node 2.2.2.1",
+                  "children": [
+                    {
+                      "name": "Some node 2.2.2.2.1"
+                    }
+                  ]
+                },
+                {
+                  "name": "Some node 2.2.2.2",
+                  "children": [
+                    {
+                      "name": "Some node 2.2.2.2.2"
+                    }
+                  ]
+                },
+                {
+                  "name": "Some node 2.2.2.3"
+                },
+                {
+                  "name": "Some node 2.2.2.4"
+                },
+                {
+                  "name": "Some node 2.2.2.5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
