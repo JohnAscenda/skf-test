@@ -53,7 +53,7 @@ const RenderMenu = ({
       {items?.map(({ name, children }: NavItem, index) => (
         <li
           key={index}
-          className={`${topLevel ? "topNode" : ""}${
+          className={`${topLevel ? "topNode" : ""} ${
             selectedItem === name ? "selectedItem" : ""
           }`}
           onClick={(e) => items[index] && toggleSubMenu(e, items[index])}
