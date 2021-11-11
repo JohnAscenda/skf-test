@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
+import Rive, { useRive } from "rive-react";
 import Header from "./components/Header/Header";
 import RenderMenu, { NavItem } from "./components/RenderMenu/RenderMenu";
 import axios from "axios";
-import musicBird from "./assets/images/music_bird.png";
 import logo from "./assets/icons/skf-logo.svg";
 import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
+//@ts-ignore
+import rive from "./assets/rive/birb.riv";
 
 interface MenuResponse {
   data: NavItem[];
@@ -48,7 +50,7 @@ function App() {
       </div>
       <main>
         <div>
-          <img src={musicBird} alt="bird" />
+          <Rive src={rive} />
           <h2>{selectedItem}</h2>
         </div>
       </main>

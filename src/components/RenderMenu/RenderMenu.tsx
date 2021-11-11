@@ -20,7 +20,7 @@ const RenderMenu = ({
   selectedItem,
   setSelectedItem,
 }: RenderMenuProps) => {
-  const [activeMenus, setActiveMenus] = useState<String[]>(Array());
+  const [activeMenus, setActiveMenus] = useState<String[]>(([] = Array()));
 
   const toggleSubMenu = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -48,6 +48,7 @@ const RenderMenu = ({
 
     setActiveMenus(newItems);
   };
+
   return (
     <ul className="menu">
       {items?.map(({ name, children }: NavItem, index) => (
