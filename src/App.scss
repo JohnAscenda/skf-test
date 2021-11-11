@@ -27,6 +27,12 @@
     &::-webkit-scrollbar-thumb:hover {
       background: #b1b1b1;
     }
+
+    display: grid;
+    grid-template-areas:
+      "logo"
+      "menus";
+    grid-template-rows: 100px auto;
   }
 
   .header {
@@ -37,9 +43,7 @@
 .menu {
   list-style: none;
   padding: 0;
-  margin: 0 auto;
   color: #5c5c5c;
-  font-weight: 500;
 
   li {
     font-size: 18px;

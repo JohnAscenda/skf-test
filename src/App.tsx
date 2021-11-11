@@ -3,6 +3,8 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import axios from "axios";
 import arrow from "./assets/icons/arrow.png";
+import logo from "./assets/icons/skf-logo.svg";
+import musicBird from "./assets/images/music_bird.png";
 
 interface NavItem {
   name: string;
@@ -22,11 +24,17 @@ function App() {
   const [activeMenus, setActiveMenus] = useState<String[]>(Array());
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [menu, setMenu] = useState<NavItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get<MenuResponse>("./backend/menu.json").then((res) => {
-      setMenu(res.data.data);
-    });
+    axios
+      .get<MenuResponse>("./backend/menu.json")
+      .then((res) => {
+        setMenu(res.data.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const RenderMenu = ({ items, topLevel = false }: RenderMenuProps) => {
@@ -94,11 +102,14 @@ function App() {
     <div className="app">
       <Header className="header" />
       <div className="menuContainer">
-        <img src="#" alt="skf" style={{ marginBottom: "120px" }} />
-        <RenderMenu items={menu} topLevel={true} />
+        <img src={logo} alt="" />
+        {!loading && <RenderMenu items={menu} topLevel={true} />}
       </div>
       <main style={{ display: "grid", placeItems: "center" }}>
-        <h2>{selectedItem}</h2>
+        <div>
+          <img src={musicBird} alt="" />
+          <h2>{selectedItem}</h2>
+        </div>
       </main>
     </div>
   );
