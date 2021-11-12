@@ -20,12 +20,17 @@ function App() {
 
   useEffect(() => {
     axios
-      .get<MenuResponse>("./backend/menu.json")
+      .get<MenuResponse>(
+        "https://run.mocky.io/v3/c271c3f4-8dfc-4983-9408-45fd8c66c9fb"
+      )
       .then((res) => {
         setMenu(res.data.data);
       })
+      .catch((err) => {
+        console.log(err.toJSON());
+      })
       .finally(() => {
-        //Faking delay from server as it's local, for animation
+        //Faking delay from server, for animation
         setTimeout(() => {
           setLoading(false);
         }, 1000);
