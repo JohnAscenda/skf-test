@@ -12,6 +12,8 @@ interface RenderMenuProps {
   topLevel?: boolean;
   selectedItem: string | null;
   setSelectedItem: React.Dispatch<React.SetStateAction<string | null>>;
+  activeMenus: String[];
+  setActiveMenus: React.Dispatch<React.SetStateAction<String[]>>;
 }
 
 const RenderMenu = ({
@@ -19,9 +21,9 @@ const RenderMenu = ({
   topLevel = false,
   selectedItem,
   setSelectedItem,
+  activeMenus,
+  setActiveMenus,
 }: RenderMenuProps) => {
-  const [activeMenus, setActiveMenus] = useState<String[]>(([] = Array()));
-
   const toggleSubMenu = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
     item: NavItem
@@ -76,6 +78,8 @@ const RenderMenu = ({
               items={children}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
+              activeMenus={activeMenus}
+              setActiveMenus={setActiveMenus}
             />
           ) : null}
         </li>

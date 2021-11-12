@@ -15,6 +15,7 @@ interface MenuResponse {
 
 function App() {
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
+  const [activeMenus, setActiveMenus] = useState<String[]>(([] = Array()));
   const [menu, setMenu] = useState<NavItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +34,7 @@ function App() {
         //Faking delay from server, for animation
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 1500);
       });
   }, []);
 
@@ -50,6 +51,8 @@ function App() {
             items={menu}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
+            activeMenus={activeMenus}
+            setActiveMenus={setActiveMenus}
           />
         )}
       </div>
